@@ -1,0 +1,29 @@
+﻿@model Prueba2.Models.ViewModels.AMBViewModels
+@{
+    ViewBag.Title = "Agregar Ingreso o egreso";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Add", "AMB", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.LabelFor(d => d.amount)
+            @Html.TextBoxFor(d => d.amount, new { @class = "form-control" })
+
+            @Html.LabelFor(d => d.date)
+            @Html.TextBoxFor(d => d.date, new { @class = "form-control" })
+
+            @Html.LabelFor(d => d.type)
+            @Html.TextBoxFor(d => d.type, new { @class = "form-control" })
+            
+            <div style="text-align:right;">
+                <input type="submit" class="btn btn-success" value="Agregar"/>
+            </div>
+        }
+
+    </div>
+
+
+</div>

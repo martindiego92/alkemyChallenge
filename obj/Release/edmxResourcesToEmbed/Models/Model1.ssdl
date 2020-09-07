@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="alkemyChallengeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cstate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'alkemyChallenge.dbo.user' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="idState" Type="int" />
+  </EntityType>
+  <EntityType Name="userAmounts">
+    <Key>
+      <PropertyRef Name="concept" />
+    </Key>
+    <Property Name="concept" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="amount" Type="float" />
+    <Property Name="date" Type="date" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+    <Property Name="isIDstate" Type="int" />
+  </EntityType>
+  <Association Name="FK_user_cstate">
+    <End Role="cstate" Type="Self.cstate" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cstate">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="idState" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userAmounts_cstate">
+    <End Role="cstate" Type="Self.cstate" Multiplicity="0..1" />
+    <End Role="userAmounts" Type="Self.userAmounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cstate">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userAmounts">
+        <PropertyRef Name="isIDstate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="alkemyChallengeModelStoreContainer">
+    <EntitySet Name="cstate" EntityType="Self.cstate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userAmounts" EntityType="Self.userAmounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [user].[id] AS [id], 
+    [user].[email] AS [email], 
+    [user].[password] AS [password], 
+    [user].[idState] AS [idState]
+    FROM [dbo].[user] AS [user]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_user_cstate" Association="Self.FK_user_cstate">
+      <End Role="cstate" EntitySet="cstate" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userAmounts_cstate" Association="Self.FK_userAmounts_cstate">
+      <End Role="cstate" EntitySet="cstate" />
+      <End Role="userAmounts" EntitySet="userAmounts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

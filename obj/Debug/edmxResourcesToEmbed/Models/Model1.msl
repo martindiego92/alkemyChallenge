@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="alkemyChallengeModelStoreContainer" CdmEntityContainer="alkemyChallengeEntities">
+    <EntitySetMapping Name="cstate">
+      <EntityTypeMapping TypeName="alkemyChallengeModel.cstate">
+        <MappingFragment StoreEntitySet="cstate">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userAmounts">
+      <EntityTypeMapping TypeName="alkemyChallengeModel.userAmounts">
+        <MappingFragment StoreEntitySet="userAmounts">
+          <ScalarProperty Name="isIDstate" ColumnName="isIDstate" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="concept" ColumnName="concept" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="alkemyChallengeModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="idState" ColumnName="idState" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

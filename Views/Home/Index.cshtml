@@ -1,0 +1,52 @@
+﻿@model List<Prueba2.Models.TableViewModel.expensesAndIncomeViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Ultimas 10 Operaciones</h2>
+<h2>
+    <td>Total</td>
+    <td>@Model.Sum(i=>i.amount)</td>
+    <td>$</td>
+    </h2>
+<div class="row">
+    <div class=" = col-lg-1-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Type</th>
+            </tr>
+            @{
+                var cont = 0;
+            }
+        
+            @foreach (var element in Model)
+            {
+
+                if(cont<10)
+                { 
+
+                    <tr>
+                        <td>@element.concept</td>
+                        <td>@element.amount</td>
+                        <td>@element.date</td>
+                        <td>@element.type</td>
+                       
+                    </tr>
+                    cont++;
+                }
+            }
+           
+        
+
+
+        </table>
+       
+
+
+    </div>
+
+</div>
